@@ -1,8 +1,6 @@
-package com.company;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Fileio {
     private static String fileName;
@@ -28,17 +26,6 @@ public class Fileio {
         //System.out.println(listChoice);
         return listChoice;
     }
-
-
-
-
-
-
-
-
-
-
-
     public static void RegisterUser() {
         ArrayList<String[]> list = new ArrayList<String[]>();
         try {
@@ -97,11 +84,81 @@ public class Fileio {
                     "Error reading file '"
                             + fileName + "'");
         }
+        if (userFound == 0) {
+            String csvFile = "UserInformation.csv";
+            BufferedReader br = null;
+            String line = "";
+            String cvsSplitBy = ",";
+            //System.out.println("");
+            try {
+                ArrayList<String> tempList = new ArrayList<String>();
+                br = new BufferedReader(new FileReader(csvFile));
+                while ((line = br.readLine()) != null) {
+                    String[] inputLine = line.split(cvsSplitBy);
+                    tempList.add(line);
+                    //System.out.println(line);
+                }
+                PrintWriter pr = new PrintWriter("UserInformation.csv");
+                tempList.add(nChoice + ",");
 
+                for (int l = 0; l < tempList.size(); l++) {
+                    //String[] temp = list.get(l);
+                    pr.println(tempList.get(l));
+                }
+                //pr.println();
+                pr.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        if (userFound == 0) {
+            String csvFile = "PrivateTweets.csv";
+            BufferedReader br = null;
+            String line = "";
+            String cvsSplitBy = ",";
+            //System.out.println("");
+            try {
+                ArrayList<String> tempList = new ArrayList<String>();
+                br = new BufferedReader(new FileReader(csvFile));
+                while ((line = br.readLine()) != null) {
+                    String[] inputLine = line.split(cvsSplitBy);
+                    tempList.add(line);
+                    //System.out.println(line);
+                }
+                PrintWriter pr = new PrintWriter("PrivateTweets.csv");
+                tempList.add("");
+                tempList.add(nChoice + ",");
 
-
-
-
+                for (int l = 0; l < tempList.size(); l++) {
+                    //String[] temp = list.get(l);
+                    pr.println(tempList.get(l));
+                }
+                //pr.println();
+                pr.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
         if (userFound == 0) {
             String csvFile = "PublicTweets.csv";
             BufferedReader br = null;
@@ -140,13 +197,6 @@ public class Fileio {
             }
         }
     }
-
-
-
-
-
-
-
     public void Mainmenu() {
     }
     public static void Login() {
